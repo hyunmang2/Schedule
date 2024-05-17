@@ -29,13 +29,13 @@ public class ScheduleController {
         return scheduleService.getSchedules();
     }
 
-    @PutMapping("/scheduls/{id}")
-    public Long updateSchedule(@PathVariable Long id, @RequestBody ScheduleRequestDto requestDto) {
+    @PutMapping("/schedules/{id}")
+    public ScheduleResponseDto updateSchedule(@PathVariable Long id, @RequestBody ScheduleRequestDto requestDto) {
         return scheduleService.updateSchedule(id, requestDto);
     }
 
     @DeleteMapping("/schedules/{id}")
-    public Long delelteSchedul(@PathVariable Long id) {
-        return scheduleService.delelteSchedul(id);
+    public Long delelteSchedul(@PathVariable Long id, ScheduleRequestDto requestDto) {
+        return scheduleService.delelteSchedul(id, requestDto);
     }
 }

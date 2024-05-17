@@ -30,4 +30,13 @@ public class ScheduleResponseDto {
         this.password = password;
         this.date = date;
     }
+
+    public ScheduleResponseDto(Long id, String title, String contents, String username, String date) {
+
+        this.id = id;
+        this.title = title;
+        this.contents = contents;
+        this.username = username;
+        this.date = date;
+    }
 }

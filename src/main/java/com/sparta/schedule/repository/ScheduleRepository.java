@@ -61,17 +61,16 @@ public class ScheduleRepository {
                 String title = rs.getString("title");
                 String contents = rs.getString("contents");
                 String username = rs.getString("username");
-                String password = rs.getString("password");
                 String date = rs.getString("date");
-                return new ScheduleResponseDto(id, title, contents, username, password, date);
+                return new ScheduleResponseDto(id, title, contents, username, date);
             }
         });
     }
 
     public void update(Long id, ScheduleRequestDto requestDto) {
-        String sql = "UPDATE schedul SET title = ?, contents = ?, username = ?, password = ?, date = ? WHERE id = ?";
-        jdbcTemplate.update(sql, requestDto.getTitle(), requestDto.getContents(), requestDto.getUsername(),
-                requestDto.getPassword(), requestDto.getDate(), id);
+        String sql = "UPDATE schedule SET title = ?, contents = ?, username = ?, date = ? WHERE id = ?";
+        jdbcTemplate.update(sql, requestDto.getTitle(), requestDto.getContents(), requestDto.getUsername()
+                , requestDto.getDate(), id);
     }
 
     public void delete(Long id) {
@@ -86,6 +85,7 @@ public class ScheduleRepository {
         return jdbcTemplate.query(sql, resultSet ->{
             if (resultSet.next()) {
                 Schedule schedule = new Schedule();
+                schedule.setId(resultSet.getLong("id"));
                 schedule.setTitle(resultSet.getString("title"));
                 schedule.setContents(resultSet.getString("contents"));
                 schedule.setUsername(resultSet.getString("username"));
