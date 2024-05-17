@@ -3,7 +3,6 @@ package com.sparta.schedule.controller;
 import com.sparta.schedule.dto.ScheduleRequestDto;
 import com.sparta.schedule.dto.ScheduleResponseDto;
 import com.sparta.schedule.service.ScheduleService;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,8 +13,8 @@ public class ScheduleController {
 
     private final ScheduleService scheduleService;
 
-    public ScheduleController(JdbcTemplate jdbcTemplate) {
-        this.scheduleService = new ScheduleService(jdbcTemplate);
+    public ScheduleController(ScheduleService scheduleService) {
+        this.scheduleService = scheduleService;
     }
 
     @PostMapping("/schedules") // 할 일 생성하기 위해 POST
