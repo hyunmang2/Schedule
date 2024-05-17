@@ -12,35 +12,31 @@ import java.util.List;
 @RequestMapping("/api") // 중복되는 패쓰 api
 public class ScheduleController {
 
-    private final JdbcTemplate jdbcTemplate;
+    private final ScheduleService scheduleService;
 
     public ScheduleController(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+        this.scheduleService = new ScheduleService(jdbcTemplate);
     }
 
     @PostMapping("/schedules") // 할 일 생성하기 위해 POST
     // 데이터는 바디 부분에 제이슨 형태로 넘어온다! (@RequestBody)
     // requestDto에는 클라이언트로부터 받아온 데이터가 들어있다.
     public ScheduleResponseDto createSchedule(@RequestBody ScheduleRequestDto requestDto) {
-        ScheduleService scheduleService = new ScheduleService(jdbcTemplate);
         return scheduleService.createSchedule(requestDto);
     }
 
     @GetMapping("/schedules")
     public List<ScheduleResponseDto> getSchedules() {
-        ScheduleService scheduleService = new ScheduleService(jdbcTemplate);
         return scheduleService.getSchedules();
     }
 
     @PutMapping("/scheduls/{id}")
     public Long updateSchedule(@PathVariable Long id, @RequestBody ScheduleRequestDto requestDto) {
-        ScheduleService scheduleService = new ScheduleService(jdbcTemplate);
         return scheduleService.updateSchedule(id, requestDto);
     }
 
     @DeleteMapping("/schedules/{id}")
     public Long delelteSchedul(@PathVariable Long id) {
-        ScheduleService scheduleService = new ScheduleService(jdbcTemplate);
         return scheduleService.delelteSchedul(id);
     }
 }
