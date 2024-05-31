@@ -71,6 +71,7 @@ public class ScheduleService {
         return id;
     }
 
+
     public void checkPassword(String password, String inputPassword) {
         if (!password.equals(inputPassword)) {
             throw new IllegalArgumentException("올바른 비밀번호를 입력해주세요");
@@ -80,6 +81,7 @@ public class ScheduleService {
     private Schedule findSchedule(Long id) {
         return scheduleRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("선택한 스케쥴은 존재하지 않습니다."));
     }
+
 }
 
 

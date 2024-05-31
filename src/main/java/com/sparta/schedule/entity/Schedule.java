@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,6 +28,15 @@ public class Schedule extends Timestamped {
     private String username;
     @Column(name = "password", nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "schedule")
+    private List<Comments> commentsList = new ArrayList<>();
+
+    public void addcommentsList(Comments comments) {
+        this.commentsList.add(comments);
+        comments.setSchedule(this); // 외래 키 설정
+
+    }
 
 
     public Schedule(ScheduleRequestDto requestDto) {

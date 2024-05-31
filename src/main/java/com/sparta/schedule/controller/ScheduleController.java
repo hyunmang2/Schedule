@@ -38,4 +38,5 @@ public class ScheduleController {
     public Long delelteSchedul(@PathVariable Long id, ScheduleRequestDto requestDto) {
         return scheduleService.delelteSchedul(id, requestDto);
     }
+
 }
