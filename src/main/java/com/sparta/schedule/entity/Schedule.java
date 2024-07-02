@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class Schedule extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 키 자동 증가?
-    private Long id;
+    private Long scheduleId;
     @Column(name = "title", nullable = false)
     private String title;
     @Column(name = "contents", nullable = false, length = 500)

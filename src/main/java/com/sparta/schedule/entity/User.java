@@ -1,10 +1,8 @@
 package com.sparta.schedule.entity;
 
-import com.sparta.schedule.entity.UserRoleEnum;
+import com.sparta.schedule.dto.SignupRequestDto;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
@@ -14,7 +12,10 @@ import lombok.Setter;
 public class User extends Timestamped{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userId;
+
+    @Column(nullable = false, unique = true)
+    private String nickname;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -22,17 +23,14 @@ public class User extends Timestamped{
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false, unique = true)
-    private String email;
-
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
-    public User(String username, String password, UserRoleEnum role) {
+    public User(String nickname, String username, String password, UserRoleEnum role) {
+        this.nickname = nickname;
         this.username = username;
         this.password = password;
-
         this.role = role;
     }
 }
