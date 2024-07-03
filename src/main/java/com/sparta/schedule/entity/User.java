@@ -1,6 +1,7 @@
 package com.sparta.schedule.entity;
 
 import com.sparta.schedule.dto.SignupRequestDto;
+import com.sparta.schedule.enums.UserStatusEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +27,10 @@ public class User extends Timestamped{
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
+
+    @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    private UserStatusEnum userStatus = UserStatusEnum.USER;
 
     public User(String nickname, String username, String password, UserRoleEnum role) {
         this.nickname = nickname;
