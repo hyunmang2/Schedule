@@ -4,6 +4,7 @@ import com.sparta.schedule.entity.UserRoleEnum;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,13 +59,16 @@ public class JwtUtil {
         res.addHeader(tokenHeader, token);
     }
 
-    // JWT 토큰 substring
-    public String substringToken(String tokenValue) {
-        if (StringUtils.hasText(tokenValue) && tokenValue.startsWith(BEARER_PREFIX)) {
-            return tokenValue.substring(7);
+    // token을 header에서 가져와서 반환하는 메서드
+    public String getTokenFromHeader(String tokenHeader, HttpServletRequest request) {
+        // header에서 token을 가져온다.
+        String token = request.getHeader(tokenHeader);
+        // 공백(null)인지 && BEARER로 시작을 하는지 확인
+        if (StringUtils.hasText(token) && token.startsWith(BEARER_PREFIX)) {
+            // 둘 다 만족할 경우 BEARER 뒤에 공백 길이만큼 잘라내고 순수한 토큰 값만을 리턴
+            return token.substring(BEARER_PREFIX.length());
         }
-        logger.error("Not Found Token");
-        throw new NullPointerException("Not Found Token");
+        return null;
     }
 
     // 토큰 검증
